@@ -7,8 +7,22 @@
 #include <algorithm>
 #include <array>
 
+#include "KICachePolicy.h"
+#include "KLruCache.h"
+
+void testHotDataAccess() {
+    std::cout << "=== Testbench 1: Hot Data Access ===" << std::endl;
+    
+    const int CAPACITY = 20;
+
+    KamaCache::KLruCache<int, std::string> lru(CAPACITY);
+}
 
 int main() {
-    std::cout << "hello world" << std::endl;
+    testHotDataAccess();
+
+    const int CAPACITY = 20;
+    const int HOT_KEYS = 20;
+    const int COLD_KEYS = 5000;
     return 0;
 }
