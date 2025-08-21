@@ -6,7 +6,7 @@ namespace KamaCache
     {
         public:
         virtual ~KICachePolicy() {};
-        virtual void put(Key key, Value value) = 0;
+        virtual void put(const Key& key, const Value& value) = 0;
         virtual bool get(Key key, Value& value) = 0;
         virtual Value get(Key key) = 0;
     };
