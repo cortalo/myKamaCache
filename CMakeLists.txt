@@ -19,7 +19,10 @@ find_package(Threads REQUIRED)
 add_executable(main testAllCachePolicy.cpp)
 
 # 单元测试可执行文件
-add_executable(unit_tests unitTests/unitTestKLruCache.cpp)
+add_executable(unit_tests 
+    unitTests/unitTestKLruCache.cpp
+    unitTests/unitTestKLfuCache.cpp
+)
 
 # 链接 Google Test 和线程库到测试可执行文件
 target_link_libraries(unit_tests 
@@ -29,7 +32,7 @@ target_link_libraries(unit_tests
 )
 
 # 添加测试
-add_test(NAME LruCacheTests COMMAND unit_tests)
+add_test(NAME CacheTests COMMAND unit_tests)
 
 # 清理中间的 .o 文件
 set_target_properties(main PROPERTIES CLEAN_DIRECT_OUTPUT 1)

@@ -9,6 +9,7 @@
 
 #include "KICachePolicy.h"
 #include "KLruCache.h"
+#include "KLfuCache.h"
 
 void testHotDataAccess() {
     std::cout << "=== Testbench 1: Hot Data Access ===" << std::endl;
@@ -19,15 +20,16 @@ void testHotDataAccess() {
     const int COLD_KEYS = 5000;
 
     KamaCache::KLruCache<int, std::string> lru(CAPACITY);
+    KamaCache::KLfuCache<int, std::string> lfu(CAPACITY);
 
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    std::array<KamaCache::KICachePolicy<int, std::string>*, 1> caches = {&lru};
+    std::array<KamaCache::KICachePolicy<int, std::string>*, 2> caches = {&lru, &lfu};
     // hits and get_operations vector to calculate hits percentage
-    std::vector<int> hits(1, 0);
-    std::vector<int> get_operations(1, 0);
-    std::vector<std::string> names = {"LRU"};
+    std::vector<int> hits(2, 0);
+    std::vector<int> get_operations(2, 0);
+    std::vector<std::string> names = {"LRU", "LFU"};
 
     for (int i = 0; i < caches.size(); ++i)
     {
