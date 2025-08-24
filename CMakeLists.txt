@@ -19,7 +19,7 @@ find_package(Threads REQUIRED)
 add_executable(main testAllCachePolicy.cpp)
 
 # 单元测试可执行文件
-add_executable(unit_tests test_lru_cache.cpp)
+add_executable(unit_tests unitTests/unitTestKLruCache.cpp)
 
 # 链接 Google Test 和线程库到测试可执行文件
 target_link_libraries(unit_tests 
@@ -38,3 +38,8 @@ set_target_properties(unit_tests PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 # 额外的编译选项（可根据需要启用）
 # target_compile_options(main PRIVATE -Wall -Wextra -O2)
 # target_compile_options(unit_tests PRIVATE -Wall -Wextra -O2)
+
+target_compile_options(unit_tests PRIVATE --coverage)
+target_link_libraries(unit_tests --coverage)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage")

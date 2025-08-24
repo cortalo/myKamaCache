@@ -42,6 +42,18 @@ ctest --verbose
 ./main
 ```
 
+### Unit Test Coverage
+```
+cd build
+make unit_tests
+./unit_tests
+gcov CMakeFiles/unit_tests.dir/unitTests/unitTestKLruCache.cpp.gcda | grep -C 3 KLru
+lcov --capture --directory CMakeFiles/unit_tests.dir/ --output-file coverage.info --ignore-errors mismatch
+lcov --remove coverage.info '/usr/*' --output-file coverage_clean.info
+genhtml coverage_clean.info --output-directory coverage_html
+```
+
+
 ## Usage Example
 
 ```cpp

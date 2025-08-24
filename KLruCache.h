@@ -32,9 +32,9 @@ namespace KamaCache
 
         Key getKey() const { return key_; }
         Value getValue() const { return value_; }
-        size_t getAccessCount() const { return accessCount_; }
+        // size_t getAccessCount() const { return accessCount_; }
         void setValue(const Value& value) { value_ = value; }
-        void incrementAccessCount() { ++accessCount_; }
+        // void incrementAccessCount() { ++accessCount_; }
 
         friend class KLruCache<Key, Value>;
 
@@ -77,13 +77,13 @@ namespace KamaCache
         // double linked list: removeNode
         void removeNode(NodePtr node)
         {
-            if(!node->prev_.expired() && node->next_)
-            {
+            //if(!node->prev_.expired() && node->next_)
+            //{
                 auto prev = node->prev_.lock(); // convert to shared_ptr
                 prev->next_ = node->next_;
                 node->next_->prev_ = prev;
                 node->next_ = nullptr;
-            }
+            //}
         }
 
         // double linked list: insetNode
@@ -191,8 +191,7 @@ namespace KamaCache
         {
             Value value{};
             get(key, value);
-            return value;
-        }
+            return value; }
 
         void remove(Key key)
         {
