@@ -37,5 +37,5 @@ TEST_F(LfuCacheTest, PutAndGet) {
     EXPECT_EQ(value, "one");
     
     EXPECT_TRUE(cache->get(2, value));
-    EXPECT_EQ(value, "two");
+    EXPECT_EQ(value, "twe");
 }
